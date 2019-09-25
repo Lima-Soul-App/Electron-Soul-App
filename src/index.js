@@ -90,7 +90,7 @@ app.on('ready', async () => {
   });
 
   // 缩小到任务栏
-  globalShortcut.register('Ctrl+X', () => {
+  globalShortcut.register('Alt+X', () => {
     win.minimize();
     mini();
   });
