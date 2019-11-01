@@ -1,4 +1,4 @@
-import { app, BrowserWindow, globalShortcut, dialog } from 'electron';
+import { app, BrowserWindow, globalShortcut, dialog, Menu, shell } from 'electron';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -64,35 +64,83 @@ function mini() {
   win3.minimize();
 }
 
+
+function MenuTable() {
+  const template = [
+    {
+      label: '帮助',
+      role: 'help',
+      submenu: [
+        {
+          label: '关于我们',
+          click() { },
+        },
+      ],
+    },
+    {
+      label: '菜单',
+      submenu: [{
+        label: '全屏或初始化',
+        accelerator: 'CmdOrCtrl+F11',
+        click() {
+          FullScreen();
+        },
+      },
+      {
+        label: '初始窗口',
+        accelerator: 'CmdOrCtrl+F11',
+        click() {
+          FullScreen();
+        },
+      },
+      {
+        label: '刷新',
+        accelerator: 'CmdOrCtrl+F5',
+        click() {
+          win.loadURL('https://chat.soulapp.cn');
+        },
+      },
+      {
+        label: '最小化',
+        accelerator: 'CmdOrCtrl + W',
+        click() {
+          mini();
+        },
+      },
+      {
+        label: '退出程序',
+        accelerator: 'CmdOrCtrl + Q',
+        click() {
+          isQuit();
+        },
+      }],
+    },
+    {
+      label: '帮助',
+      role: 'help',
+      submenu: [
+        {
+          label: '找到我',
+          click() { shell.openExternal('https://github.com/JamesDream87/'); },
+        },
+      ],
+    },
+  ];
+
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 // app.on('ready', createWindow);
 app.on('ready', async () => {
-  // 退出快捷键
-  globalShortcut.register('Ctrl+Q', () => {
-    isQuit();
-  });
+  MenuTable();
 
-  // 刷新
-  globalShortcut.register('F5', () => {
-    win.loadURL('https://chat.soulapp.cn');
-  });
-
-  // 控制台快捷键
-  globalShortcut.register('Ctrl+F12', () => {
-    win.webContents.openDevTools();
-  });
-
-  // 全屏快捷键
-  globalShortcut.register('F11', () => {
-    FullScreen();
-  });
-
-  // 缩小到任务栏
-  globalShortcut.register('Alt+X', () => {
-    win.minimize();
-    mini();
+  // 显示窗口
+  globalShortcut.register('CmdOrCtrl+X', () => {
+    win.show();
   });
 
   // 隐藏窗口

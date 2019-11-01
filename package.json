@@ -8,7 +8,8 @@
     "package": "make package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint src --color"
+    "lint": "eslint src --color",
+    "icon": "electron-icon-builder --input=./public/all.png --output=icons-build --flatten"
   },
   "keywords": [],
   "author": "JamesDream",
@@ -28,7 +29,8 @@
         ]
       },
       "electronPackagerConfig": {
-        "packageManager": "npm"
+        "packageManager": "npm",
+        "icon": "public/icon"
       },
       "electronWinstallerConfig": {
         "name": "Soul-APP"
@@ -47,6 +49,7 @@
   },
   "dependencies": {
     "electron-compile": "^6.4.4",
+    "electron-icon-builder": "^1.0.1",
     "electron-squirrel-startup": "^1.0.0"
   },
   "devDependencies": {
