@@ -139,12 +139,12 @@ app.on('ready', async () => {
   MenuTable();
 
   // 显示窗口
-  globalShortcut.register('CmdOrCtrl+X', () => {
+  globalShortcut.register('CmdOrCtrl+E', () => {
     win.show();
   });
 
   // 隐藏窗口
-  globalShortcut.register('Alt+D', () => {
+  globalShortcut.register('CmdOrCtrl+D', () => {
     if (win.isVisible() === true) {
       win.hide();
     } else {
